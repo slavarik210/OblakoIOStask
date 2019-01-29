@@ -11,7 +11,7 @@ import UIKit
 class CustomCheckboxCell: UITableViewCell {
     
     @IBOutlet weak var todoCheckbox: M13Checkbox!
-    @IBOutlet weak var todoTitle: UILabel?
+    @IBOutlet weak var todoText: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()

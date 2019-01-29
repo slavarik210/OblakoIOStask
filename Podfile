@@ -9,6 +9,6 @@ target 'OblakoIOStask' do
   pod 'Alamofire'
   pod 'SwiftyJSON’
   pod 'M13Checkbox'
-
+pod 'CodableAlamofire'
 
 end

@@ -6,72 +6,116 @@
 //  Copyright © 2019 skarus. All rights reserved.
 //
 
+import UIKit;
 
-import UIKit
-import M13Checkbox
-class TodosController: CustomTableview {
+import M13Checkbox;
+
+import Alamofire;
+
+import SwiftyJSON;
+
+class TodosController: CustomTableview, UpdateTodosDelegate {
+
+    @IBOutlet weak var todoTableView: UITableView!
     
-    @IBOutlet weak var todoTableView: UITableViewCell!
+    var projects: [Project] = []
     
-    let project1 = ["Заплатить за квартиру", "Купить продукты" ,"Забрать обувь из ремонта"]
-    let project2 = ["Заполнить отчёт", "Отправить документы" ,"Позвонить заказчику"]
-    
-    let todo = ["Семья", "Работа", "Прочее"]
     @IBOutlet weak var addTodoButton: UINavigationItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(UINib(nibName: "CustomCheckboxCell", bundle: nil), forCellReuseIdentifier: "customCheckboxCell")
+        self.tableView.register(
+            UINib(nibName: "CustomCheckboxCell", bundle: nil),
+            forCellReuseIdentifier: "customCheckboxCell"
+        )
+        getTodosData()
     }
-    
+
+
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return todo.count
-        
+        return self.projects.count
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let header = todo[section]
-        return header
+//        let header = tableView.dequeueReusableCell(withIdentifier: "header")
+//        header?.textLabel?.text = self.projects[section].title
+        return self.projects[section].title
     }
-    
-    
+
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return self.projects[section].todos.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCheckboxCell", for: indexPath) as! CustomCheckboxCell
+        cell.todoText!.text = self.projects[indexPath.section].todos[indexPath.row].text
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customCheckboxCell") as! CustomCheckboxCell
-        if indexPath.section == 1 {
-            cell.todoTitle?.text = project2[indexPath.row]
-            
-        } else {
-            cell.todoTitle?.text = project1[indexPath.row]
-            
-            
+        if self.projects[indexPath.section].todos[indexPath.row].isCompleted{
+            (cell.todoCheckbox as M13Checkbox).setCheckState(
+                M13Checkbox.CheckState.checked,
+                animated: false
+            )
         }
         
+        slash(cell: cell)
+        
         return cell
+        
     }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell: CustomCheckboxCell = tableView.cellForRow(at: indexPath) as! CustomCheckboxCell
-        if cell.todoCheckbox.checkState == .unchecked {
-            cell.todoTitle?.attributedText = String.makeSlashText((cell.todoTitle?.text)!)
-            cell.todoCheckbox.setCheckState(.checked, animated: true)
-        } else {
-            cell.todoCheckbox.setCheckState(.unchecked, animated: true)
-            cell.todoTitle?.attributedText = String.makePlainText((cell.todoTitle?.attributedText)!)
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
+        let todo = self.projects[indexPath.section].todos[indexPath.row]
         
+        cell.todoCheckbox.toggleCheckState()
+        slash(cell: cell)
+        
+        updateTodoState(todoId: todo.id)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nav = segue.destination as! UINavigationController
+        (nav.topViewController as! AddTodoController).delegate = self
+    }
+
+    func slash(cell: CustomCheckboxCell){
+        if cell.todoCheckbox.checkState == .checked {
+            cell.todoText?.attributedText = String.makeSlashText((cell.todoText?.text)!)
+        } else {
+            cell.todoText?.attributedText = String.makePlainText((cell.todoText?.attributedText)!)
+        }
+    }
+    
+    func getTodosData(){
+            Alamofire.request("https://mytaskoblako.herokuapp.com/projects/all.json").responseJSON(completionHandler:{ response in
+            switch response.result{
+                case .success:
+                    self.projects = []
+                    let json = JSON(response.result.value!)
+                    for (_,project) in json["projects"] {
+                        self.projects.append(Project(json: project))
+                    }
+                    for (_,todo) in json["todos"] {
+                        self.projects[todo["projectId"].int! - 1].addTodo(todo: Todo(json: todo))
+                    }
+                    self.todoTableView.reloadData()
+                case .failure:
+                    print("Error")
+                }
+        })
+    }
+    func updateTodoState(todoId: Int) {
+        Alamofire.request("https://mytaskoblako.herokuapp.com/todos/\(todoId)", method: .put)
+    }
+    
     
     
 }
 extension String {
     static func makeSlashText(_ text:String) -> NSAttributedString {
-        
         
         let attr: NSMutableAttributedString =  NSMutableAttributedString(string: text)
         attr.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attr.length))

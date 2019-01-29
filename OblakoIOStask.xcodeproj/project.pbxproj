@@ -16,12 +16,13 @@
 		BE2DDCE021FC9B5600D8F59E /* CustomTableview.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DDCDF21FC9B5600D8F59E /* CustomTableview.swift */; };
 		BE2DDCE321FC9D0200D8F59E /* CustomCheckboxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE2DDCE221FC9D0200D8F59E /* CustomCheckboxCell.xib */; };
 		BE2DDCE521FC9D2D00D8F59E /* CustomCheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DDCE421FC9D2D00D8F59E /* CustomCheckboxCell.swift */; };
-		BE2DDCE721FC9FFF00D8F59E /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DDCE621FC9FFF00D8F59E /* Project.swift */; };
-		BE2DDCE921FCA01900D8F59E /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DDCE821FCA01900D8F59E /* Todo.swift */; };
 		BE2DDCEB21FCA06E00D8F59E /* AddTodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2DDCEA21FCA06E00D8F59E /* AddTodoController.swift */; };
 		BE2DDCF521FCA47700D8F59E /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE2DDCF121FCA47600D8F59E /* OpenSans-Regular.ttf */; };
 		BE2DDCF621FCA47700D8F59E /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE2DDCF221FCA47600D8F59E /* OpenSans-Light.ttf */; };
 		BE2DDCF721FCA47700D8F59E /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE2DDCF321FCA47600D8F59E /* OpenSans-Semibold.ttf */; };
+		BE392EAE2200859600C9140C /* AddTodoControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE392EAD2200859600C9140C /* AddTodoControllerCell.swift */; };
+		BE6ED90A21FED8BC00AAC4FF /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED90921FED8BC00AAC4FF /* Project.swift */; };
+		BE6ED90C21FED9EC00AAC4FF /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6ED90B21FED9EC00AAC4FF /* Todo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,12 +38,13 @@
 		BE2DDCDF21FC9B5600D8F59E /* CustomTableview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableview.swift; sourceTree = "<group>"; };
 		BE2DDCE221FC9D0200D8F59E /* CustomCheckboxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCheckboxCell.xib; sourceTree = "<group>"; };
 		BE2DDCE421FC9D2D00D8F59E /* CustomCheckboxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCheckboxCell.swift; sourceTree = "<group>"; };
-		BE2DDCE621FC9FFF00D8F59E /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		BE2DDCE821FCA01900D8F59E /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		BE2DDCEA21FCA06E00D8F59E /* AddTodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoController.swift; sourceTree = "<group>"; };
 		BE2DDCF121FCA47600D8F59E /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		BE2DDCF221FCA47600D8F59E /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		BE2DDCF321FCA47600D8F59E /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		BE392EAD2200859600C9140C /* AddTodoControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoControllerCell.swift; sourceTree = "<group>"; };
+		BE6ED90921FED8BC00AAC4FF /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		BE6ED90B21FED9EC00AAC4FF /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		EF733714ED65A5DA92BF0CFE /* Pods-OblakoIOStask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OblakoIOStask.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OblakoIOStask/Pods-OblakoIOStask.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,10 +106,11 @@
 				BE2DDCD421FC8EB100D8F59E /* LaunchScreen.storyboard */,
 				BE2DDCD721FC8EB100D8F59E /* Info.plist */,
 				BE2DDCDD21FC9AC300D8F59E /* TodosController.swift */,
+				BE6ED90921FED8BC00AAC4FF /* Project.swift */,
+				BE6ED90B21FED9EC00AAC4FF /* Todo.swift */,
 				BE2DDCDF21FC9B5600D8F59E /* CustomTableview.swift */,
-				BE2DDCE621FC9FFF00D8F59E /* Project.swift */,
-				BE2DDCE821FCA01900D8F59E /* Todo.swift */,
 				BE2DDCEA21FCA06E00D8F59E /* AddTodoController.swift */,
+				BE392EAD2200859600C9140C /* AddTodoControllerCell.swift */,
 			);
 			path = OblakoIOStask;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-OblakoIOStask/Pods-OblakoIOStask-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/M13Checkbox/M13Checkbox.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -222,6 +226,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/M13Checkbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -260,12 +265,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE2DDCE521FC9D2D00D8F59E /* CustomCheckboxCell.swift in Sources */,
+				BE392EAE2200859600C9140C /* AddTodoControllerCell.swift in Sources */,
 				BE2DDCEB21FCA06E00D8F59E /* AddTodoController.swift in Sources */,
 				BE2DDCDE21FC9AC300D8F59E /* TodosController.swift in Sources */,
-				BE2DDCE921FCA01900D8F59E /* Todo.swift in Sources */,
+				BE6ED90C21FED9EC00AAC4FF /* Todo.swift in Sources */,
 				BE2DDCE021FC9B5600D8F59E /* CustomTableview.swift in Sources */,
 				BE2DDCCA21FC8E9E00D8F59E /* AppDelegate.swift in Sources */,
-				BE2DDCE721FC9FFF00D8F59E /* Project.swift in Sources */,
+				BE6ED90A21FED8BC00AAC4FF /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
