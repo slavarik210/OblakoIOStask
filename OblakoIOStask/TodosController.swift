@@ -37,8 +37,6 @@ class TodosController: CustomTableview, UpdateTodosDelegate {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let header = tableView.dequeueReusableCell(withIdentifier: "header")
-//        header?.textLabel?.text = self.projects[section].title
         return self.projects[section].title
     }
 
@@ -47,22 +45,24 @@ class TodosController: CustomTableview, UpdateTodosDelegate {
         return self.projects[section].todos.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customCheckboxCell", for: indexPath) as! CustomCheckboxCell
-        cell.todoText!.text = self.projects[indexPath.section].todos[indexPath.row].text
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if self.projects[indexPath.section].todos[indexPath.row].isCompleted{
-            (cell.todoCheckbox as M13Checkbox).setCheckState(
-                M13Checkbox.CheckState.checked,
-                animated: false
-            )
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCheckboxCell") as! CustomCheckboxCell
+        let sectionId = projects[indexPath.section].id
+        let todo = self.projects[indexPath.section].todos[indexPath.row]
+        let todoText = todo.text
+        let todoCompleted = todo.isCompleted
+        cell.todoText?.text = todoText
+        cell.todoCheckbox.setCheckState(checkBoxStateFromBoolean(state: todoCompleted), animated: false)
+        if todoCompleted == true {
+            cell.todoText?.attributedText = String.makeSlashText((cell.todoText?.text)!)
         }
         
-        slash(cell: cell)
-        
         return cell
-        
+    }
+    func checkBoxStateFromBoolean(state: Bool) -> M13Checkbox.CheckState {
+        return (state == true) ? .checked : .unchecked
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -73,6 +73,7 @@ class TodosController: CustomTableview, UpdateTodosDelegate {
         slash(cell: cell)
         
         updateTodoState(todoId: todo.id)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
