@@ -89,6 +89,7 @@ class AddTodoController: CustomTableview {
         }
     }
     @IBAction func cancelPressed(_ sender: UIBarButtonItem) {
+        self.delegate?.getTodosData()
         navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
