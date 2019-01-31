@@ -13,6 +13,7 @@ class Todo{
     var id:Int
     var text:String
     var isCompleted:Bool
+    var projectId:Int = 0
     
     init(id: Int, text:String, isCompleted:Bool){
         self.id = id
@@ -29,5 +30,6 @@ class Todo{
         self.id = json["id"].int!
         self.text = json["text"].string!
         self.isCompleted = json["isCompleted"].bool!
+        self.projectId = json["projectId"].int!
     }
 }

@@ -28,7 +28,6 @@ class AddTodoController: CustomTableview {
     override func viewDidLoad() {
         super.viewDidLoad()
         getProjectsData()
-        print()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -131,6 +130,7 @@ class AddTodoController: CustomTableview {
                 print("Error")
             }
         })
+        self.tableView.reloadData()
     }
     func addNewTodo(projectId: Int, text: String) {
         Alamofire.request("https://mytaskoblako.herokuapp.com/todos", method: .post, parameters: ["todo":["project_id": projectId,"text":text]])
