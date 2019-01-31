@@ -107,11 +107,20 @@ class AddTodoController: CustomTableview {
                 let cell = addTodoTableView.cellForRow(at: IndexPath(row: row, section: section))
                 if let textField = cell?.viewWithTag(101) as? UITextField
                 {
-                    addNewTodo(projectId: projects[selectedRow].id, text: textField.text!)
-                    
-                    self.delegate?.getTodosData()
-                    navigationController?.popViewController(animated: true)
-                    dismiss(animated: true, completion: nil)
+                    Alamofire.request(
+                        "https://mytaskoblako.herokuapp.com/todos",
+                        method: .post,
+                        parameters: [
+                            "todo": [
+                                "project_id": projects[selectedRow].id,
+                                "text":textField.text!
+                            ]
+                        ]
+                    ).response{ response in
+                        self.delegate?.getTodosData()
+                        self.navigationController?.popViewController(animated: true)
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
         }
@@ -131,9 +140,6 @@ class AddTodoController: CustomTableview {
             }
         })
         self.tableView.reloadData()
-    }
-    func addNewTodo(projectId: Int, text: String) {
-        Alamofire.request("https://mytaskoblako.herokuapp.com/todos", method: .post, parameters: ["todo":["project_id": projectId,"text":text]])
     }
 }
 
